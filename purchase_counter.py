@@ -8,13 +8,13 @@ class PurchaseCounter:
 
     def __init__(self, path_to_file):
         self._path_to_file = path_to_file
-        self._total_amount_by_each_purchase = {}
+        self._total_amounts_by_purchases = {}
 
-    def _add_purchase_to_total_by_count(self, purchase_name: str, purchase_count: int):
-        if purchase_name not in self._total_amount_by_each_purchase:
-            self._total_amount_by_each_purchase[purchase_name] = purchase_count
+    def _add_purchase_to_total_amounts_by_purchases(self, purchase: str, purchase_count: int):
+        if purchase not in self._total_amounts_by_purchases:
+            self._total_amounts_by_purchases[purchase] = purchase_count
         else:
-            self._total_amount_by_each_purchase[purchase_name] += purchase_count
+            self._total_amounts_by_purchases[purchase] += purchase_count
 
     @staticmethod
     def _parse_row_to_purchase_data(row: str):
@@ -29,22 +29,22 @@ class PurchaseCounter:
             raise PurchaseCountIsNotIntegerError
         return int(purchase_count)
 
-    def _calculate_total_amount_by_each_purchase(self):
+    def _calculate_total_amounts_by_purchases(self):
         with open(self._path_to_file, "r") as file_as_purchase_data:
             for row in file_as_purchase_data:
                 try:
-                    purchase_name, purchase_count = self._parse_row_to_purchase_data(row)
+                    purchase, purchase_count = self._parse_row_to_purchase_data(row)
                     purchase_count_as_int = self._convert_purchase_count_to_integer(purchase_count)
 
-                    self._add_purchase_to_total_by_count(purchase_name, purchase_count_as_int)
+                    self._add_purchase_to_total_amounts_by_purchases(purchase, purchase_count_as_int)
                 except (ParseRowToPurchaseDataError, PurchaseCountIsNotIntegerError):
                     continue
 
-    def _print_total_by_purchases(self):
+    def _print_total_amounts_by_purchases(self):
         print("Итог по всем покупкам:")
-        for purchase, count in self._total_amount_by_each_purchase.items():
+        for purchase, count in self._total_amounts_by_purchases.items():
             print(f"{purchase}: {count}")
 
-    def report_total_amount_by_each_purchase(self):
-        self._calculate_total_amount_by_each_purchase()
-        self._print_total_by_purchases()
+    def report_total_amounts_by_purchases(self):
+        self._calculate_total_amounts_by_purchases()
+        self._print_total_amounts_by_purchases()
