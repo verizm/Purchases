@@ -45,6 +45,6 @@ class PurchaseCounter:
         for purchase, count in self._total_count_by_each_purchases.items():
             print(f"{purchase}: {count}")
 
-    def report_total_amounts_by_purchases(self):
+    def report_total_amounts_by_each_purchases(self):
         self._calculate_total_count_by_each_purchases()
         self._print_total_count_by_each_purchases()
