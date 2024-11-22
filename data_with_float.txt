@@ -1,0 +1,9 @@
+apple:  0.1
+banana: 0.1
+orange: три
+grape:  два
+
+apple:  0.5
+banana: 0.1
+box of oranges
+grape:  0.1

@@ -1,0 +1,10 @@
+
+apple:  10
+banana: 5
+orange: три
+grape:  два
+
+apple:  3
+banana: 2
+box of oranges
+grape:  6
